@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class Second {
 
     public static void main(String[] args) {
-        System.out.println(parseInputFile("/home/seba/workspace/AOF2023/01/input1.txt"));
+        System.out.println(parseInputFile("/home/seba/workspace/Advent-of-code-2023/01/input1.txt"));
     }
 
     public static int parseInputFile(String fileName) {
@@ -32,21 +32,38 @@ public class Second {
         int last = -1;
         for (int i = 0; i < numbers.length; i++) {
             int idx = line.indexOf(numbers[i]);
-            if (idx < 0)
-                continue;
-            if (firstIndex < 0 || idx < firstIndex) {
+
+            if (idx >= 0 && firstIndex < 0 || idx < firstIndex) {
                 firstIndex = idx;
                 first = i;
             }
 
-            if (lastIndex < 0 || idx > lastIndex) {
+            idx = line.lastIndexOf(numbers[i]);
+
+            if (idx >= 0 && lastIndex < 0 || idx > lastIndex) {
                 lastIndex = idx;
                 last = i;
             }
+
+            idx = line.indexOf(String.valueOf(i));
+
+            if (idx >= 0 && firstIndex < 0 || idx < firstIndex) {
+                firstIndex = idx;
+                first = i;
+            }
+
+            idx = line.lastIndexOf(String.valueOf(i));
+            if (idx >= 0 && lastIndex < 0 || idx > lastIndex) {
+                lastIndex = idx;
+                last = i;
+            }
+
         }
+        System.out.println(String.format("%d%d", first, last));
         if (first < 0 && last < 0)
             return 0;
 
         return Integer.parseInt(String.format("%d%d", first, last));
     }
+
 }
