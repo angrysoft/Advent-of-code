@@ -1,7 +1,6 @@
+package Day01;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Second {
@@ -31,35 +30,39 @@ public class Second {
         int first = -1;
         int last = -1;
         for (int i = 0; i < numbers.length; i++) {
-            int idx = line.indexOf(numbers[i]);
-
-            if (idx >= 0 && firstIndex < 0 || idx < firstIndex) {
-                firstIndex = idx;
-                first = i;
+            int fidx = line.indexOf(numbers[i]);
+            int lidx = line.lastIndexOf(numbers[i]);
+            if (fidx >= 0) {
+                if (firstIndex < 0 || firstIndex > fidx) {
+                    firstIndex = fidx;
+                    first = i;
+                }
             }
 
-            idx = line.lastIndexOf(numbers[i]);
-
-            if (idx >= 0 && lastIndex < 0 || idx > lastIndex) {
-                lastIndex = idx;
-                last = i;
+            if (lidx >= 0) {
+                if (lastIndex < 0 || lastIndex < lidx) {
+                    lastIndex = lidx;
+                    last = i;
+                }
             }
 
-            idx = line.indexOf(String.valueOf(i));
-
-            if (idx >= 0 && firstIndex < 0 || idx < firstIndex) {
-                firstIndex = idx;
-                first = i;
+            fidx = line.indexOf(String.valueOf(i));
+            lidx = line.lastIndexOf(String.valueOf(i));
+            if (fidx >= 0) {
+                if (firstIndex < 0 || firstIndex > fidx) {
+                    firstIndex = fidx;
+                    first = i;
+                }
             }
 
-            idx = line.lastIndexOf(String.valueOf(i));
-            if (idx >= 0 && lastIndex < 0 || idx > lastIndex) {
-                lastIndex = idx;
-                last = i;
+            if (lidx >= 0) {
+                if (lastIndex < 0 || lastIndex < lidx) {
+                    lastIndex = lidx;
+                    last = i;
+                }
             }
-
         }
-        System.out.println(String.format("%d%d", first, last));
+
         if (first < 0 && last < 0)
             return 0;
 
