@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class First {
 
     public static void main(String[] args) {
-        System.out.println(parseInputFile("/home/seba/workspace/AOF2023/01/input1.txt"));
+        System.out.println(parseInputFile("input1.txt"));
     }
 
     public static int parseInputFile(String fileName) {
